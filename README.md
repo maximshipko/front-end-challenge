@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### React Router (9K gzip)
+
+Although for such a simple app, routing could have been implemented I've used it for a couple of reasons. First, any new dev jumping in the project will already know what react-router is, hence no need to document it and maintain.
+
 # TODO
 
 - [ ] Autogenerate api services with types based on specification
