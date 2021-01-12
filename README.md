@@ -1,16 +1,37 @@
-# Collibra Coding Challenge
+[![Netlify Status](https://api.netlify.com/api/v1/badges/802ab005-3164-478b-a6c9-08130e50170d/deploy-status)](https://app.netlify.com/sites/sleepy-poitras-f1fe38/deploys)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ✨ Demo App for Collibra Coding Challenge
 
-### React Router (9K gzip)
+See the demo: [The Movie Db](https://app.netlify.com/sites/sleepy-poitras-f1fe38/deploys)
 
-Although for such a simple app, routing could have been implemented I've used it for a couple of reasons. First, any new dev jumping in the project will already know what react-router is, hence no need to document it and maintain.
+## API
 
-# TODO
+This project is using [The Movie Database (TMBb) api](https://www.themoviedb.org/documentation/api).
+The api is available for everyone, but requirs api key to identify applications. To get the key, first register as TMDb user, and then request API key from within your [account Setting page](https://www.themoviedb.org/settings/api).
+
+To run the project localy, you will need to setup your local environment variables in .env.local file. See the example file in the root directory.
+
+For more details on available data check out The Movie Database [API documentation](https://developers.themoviedb.org/3/)
+
+## Libraries used
+
+### Material UI
+
+### React Router
+
+Although, for such a simple app, routing could have been implemented, I've used it for a couple of reasons. First, any new dev jumping in the project will already know what react-router is, hence no need to document it and maintain.
+
+## TODO
 
 - [ ] Autogenerate api services with types based on specification
 - [ ] On app initialization, make api call to get all required configuration
 - [ ] Use Formik or react-hook-form
+- [ ] Use SWR or react-query for fetching data.
+- [ ] Add typeahead feature for search bar. Throttle quick typing
+- [ ] Add pagination for movie lists
+- [ ] Sequre api key. Create a proxy server that will hide apy key from exposing to end user.
+
+#
 
 <details>
     <summary>Challenge details</summary>
