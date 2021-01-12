@@ -1,46 +1,57 @@
-# Getting Started with Create React App
+# Collibra Coding Challenge
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+<details>
+    <summary>Challenge details</summary>
 
-In the project directory, you can run:
+## Intro
 
-### `yarn start`
+This challenge will help us evaluate your coding style and how you structure your projects.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+What do we expect from you:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Develop simple and well-designed components
+- Clean and modern look
+- Provide a good experience for developers jumping in your project
 
-### `yarn test`
+## The challenge
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Choose a public API and develop an app with it.
 
-### `yarn build`
+- [Public GraphQl APIs](https://github.com/APIs-guru/graphql-apis)
+- [Public JSON](https://github.com/public-apis/public-apis)
+- [REQ | RES](https://reqres.in/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Requirements
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Must be written in React
+- Create one page with a list of items (can be a list or table)
+- Create a detailed view of an item (can be a page, modal, ...)
+- Create an add/edit form (it should display an error toast when submitting)
+- Create a delete button (it should display an error toast when submitting)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Extras
 
-### `yarn eject`
+- Document the project
+- Use Typescript
+- Create tests with jest
+- Be creative and implement a new feature
+- You can use a GraphQl client (Relay, Apollo,...)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Tips
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Try to use libraries you are already familiar with
+- Before choosing the API, check if you can all the information you want from it
+- You can use a boilerplate for your project
+  - create-react-app
+  - create-react-app with typescript
+- You can use a UI framework to make your app look cool
+  - Office UI Fabric
+  - Material UI
+- Documentation
+  - How to run the project
+  - Things you want to improve in your project
+  - Explain the technology and libraries used
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+</details>
