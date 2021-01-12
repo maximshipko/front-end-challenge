@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# TODO
+
+- [ ] Autogenerate api services with types based on specification
+- [ ] On app initialization, make api call to get all required configuration
+- [ ] Use Formik or react-hook-form
+
 <details>
     <summary>Challenge details</summary>
 
