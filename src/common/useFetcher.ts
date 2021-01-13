@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 
-const cache = new Map<string, unknown>(); // TODO: refactor, do cleanup to avoid memory leaks
+const cache = new Map<string, unknown>();
+// TODO: refactor, do cleanup to avoid memory leaks
+// TODO: cache not only Data, but also "Promise of Data" to avoid duplicate fetch
 
 export const useFetcher = <D extends unknown>(
-  key: string | null = null,
+  key: string,
   fetcherFn: () => Promise<D>
 ) => {
   const [data, setData] = useState<D>(null!);

@@ -21,9 +21,9 @@ export const MovieDetailsView = () => {
   return (
     <div className="movie-details">
       {loading ? (
-        <p>
+        <div>
           <CircularProgress size={16} /> Loading...
-        </p>
+        </div>
       ) : (
         <MovieDetails movie={data} />
       )}

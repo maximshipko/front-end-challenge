@@ -14,9 +14,9 @@ export const MoviesListView = () => {
     <div className="movies">
       <h1>Great Movies</h1>
       {loading ? (
-        <p>
+        <div>
           <CircularProgress size={16} /> Loading...
-        </p>
+        </div>
       ) : (
         <MoviesList movies={data.results} />
       )}

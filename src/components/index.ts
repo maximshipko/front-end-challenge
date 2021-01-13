@@ -7,3 +7,5 @@ export * from "./MovieDetails";
 export * from "./MovieCard";
 export * from "./MovieForm";
 export * from "./Genres";
+export * from "./Form";
+export * from "./formControls/";

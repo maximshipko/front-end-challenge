@@ -9,9 +9,7 @@ export const Genres = ({ genres }: MovieCardProps) => {
   return (
     <>
       {genres.map((genre) => (
-        <>
-          <Chip size="small" label={genre.name} />{" "}
-        </>
+        <Chip size="small" label={genre.name} key={genre.id} />
       ))}
     </>
   );

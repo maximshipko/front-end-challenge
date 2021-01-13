@@ -25,9 +25,8 @@ export interface MovieDetailed extends Omit<Movie, "genre_ids"> {
 }
 
 export interface NewMovie
-  extends Omit<
-    MovieDetailed,
-    "id" | "vote_average" | "vote_count" | "popularity"
+  extends Partial<
+    Omit<MovieDetailed, "id" | "vote_average" | "vote_count" | "popularity">
   > {}
 
 type Genres = {

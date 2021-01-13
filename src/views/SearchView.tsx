@@ -17,9 +17,9 @@ export const SearchView = () => {
     <div className="search-results">
       <h1>Movie Search for: {query}</h1>
       {loading ? (
-        <p>
+        <div>
           <CircularProgress size={16} /> Loading...
-        </p>
+        </div>
       ) : (
         <MoviesList movies={data.results} />
       )}

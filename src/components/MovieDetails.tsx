@@ -57,15 +57,13 @@ export const MovieDetails = ({ movie }: MovieDetailsProps) => {
 
       <Grid container alignItems="flex-start" spacing={2}>
         <Grid item xs>
-          <Typography gutterBottom>
-            <Genres genres={movie.genres} />
-          </Typography>
+          <Genres genres={movie.genres} />
           <Typography variant="h6">Synopsis</Typography>
           <Typography paragraph>{movie.overview || "No Synopsis"}</Typography>
           <Typography variant="h6">Production</Typography>
           <ul>
             {movie?.production_companies.map((pc) => (
-              <li>{pc.name}</li>
+              <li key={pc.id}>{pc.name}</li>
             ))}
           </ul>
         </Grid>
