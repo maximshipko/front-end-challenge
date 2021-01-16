@@ -1,10 +1,12 @@
+import type { Country, Company, Genre, Language } from ".";
+
 export interface Movie {
   id: number;
   title: string;
   original_title: string;
   release_date: string;
   genre_ids: number[];
-  original_language: LanguageISO;
+  original_language: Language["iso_639_1"];
   vote_average: number;
   vote_count: number;
   popularity: number;
@@ -12,45 +14,30 @@ export interface Movie {
   poster_path: string | null;
 }
 
-export interface MovieDetailed extends Omit<Movie, "genre_ids"> {
+export interface MovieDetailed extends Movie {
   budget: number;
-  genres: Genres[];
+  genres: Genre[];
   homepage: string;
   imdb_id: string;
   backdrop_path: string | null;
-  production_companies: ProductionCompany[];
-  production_countries: ProductionCountry[];
+  production_companies: Company[];
+  production_countries: Country[];
+  production_countries_ids: string[];
   revenue: number;
-  spoken_languages: SpokenLanguages[];
+  spoken_languages: Language[];
+  spoken_languages_ids: string[];
 }
 
-export interface NewMovie
-  extends Partial<
-    Omit<MovieDetailed, "id" | "vote_average" | "vote_count" | "popularity">
-  > {}
+export interface NewMovie extends Partial<MovieDetailed> {
+  genre_ids: number[];
+  spoken_languages_ids: string[];
+}
 
-type Genres = {
-  id: number;
-  name: string;
+export type PagedResponse<T = unknown> = {
+  results: T[];
+  page: number;
+  total_pages: number;
+  total_results: number;
 };
 
-type ProductionCompany = {
-  id: number;
-  logo_path: string;
-  name: string;
-  origin_country: CountryISO;
-};
-
-type ProductionCountry = {
-  iso_3166_1: CountryISO;
-  name: string;
-};
-
-type SpokenLanguages = {
-  iso_639_1: LanguageISO;
-  name: string;
-  english_name: string;
-};
-
-type CountryISO = string; //TODO: "US" | "GB" | "DE";
-type LanguageISO = string; // TODO: "en" | "de";
+export type MovieListResponse = PagedResponse<Movie>;

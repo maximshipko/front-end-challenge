@@ -1,14 +1,6 @@
-import type { Movie, MovieDetailed, NewMovie } from "../models";
+import type { MovieDetailed, NewMovie, MovieListResponse } from "..";
+import { API_KEY, API_BASE_URL, sleep } from "common/";
 
-type PagedResponse<T> = {
-  results: T[];
-  page: number;
-  total_pages: number;
-  total_results: number;
-};
-
-type MovieListResponse = PagedResponse<Movie>;
-const baseUrl = process.env.REACT_APP_API_BASE || "/";
 const coolMoviesParams = {
   language: "en-US",
   sort_by: "popularity.desc",
@@ -22,11 +14,11 @@ const coolMoviesParams = {
 
 export const list = (page: number = 1) => {
   const queryString = new URLSearchParams({
-    api_key: String(process.env.REACT_APP_API_KEY),
+    api_key: API_KEY,
     page: String(page),
     ...coolMoviesParams,
   });
-  const url = `${baseUrl}discover/movie?${queryString}`;
+  const url = `${API_BASE_URL}discover/movie?${queryString}`;
   return fetch(url).then((response) => {
     if (!response.ok) {
       throw new Error(response.statusText);
@@ -49,7 +41,7 @@ export const search = (query: string) => {
     api_key: String(process.env.REACT_APP_API_KEY),
     query,
   });
-  const url = `${baseUrl}search/movie?${queryString}`;
+  const url = `${API_BASE_URL}search/movie?${queryString}`;
   return fetch(url).then((response) => {
     if (!response.ok) {
       throw new Error(response.statusText);
@@ -63,21 +55,38 @@ export const details = (movieId: number) => {
   const queryString = new URLSearchParams({
     api_key: String(process.env.REACT_APP_API_KEY),
   });
-  const url = `${baseUrl}movie/${movieId}?${queryString}`;
-  return fetch(url).then((response) => {
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    } else {
-      return response.json() as Promise<MovieDetailed>;
-    }
-  });
+  const url = `${API_BASE_URL}movie/${movieId}?${queryString}`;
+  return fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      } else {
+        return response.json() as Promise<MovieDetailed>;
+      }
+    })
+    .then((movie) => {
+      movie.genre_ids = movie.genres.map((g) => g.id);
+      movie.spoken_languages_ids = movie.spoken_languages.map(
+        (lang) => lang.iso_639_1
+      );
+      movie.production_countries_ids = movie.production_countries.map(
+        (c) => c.iso_3166_1
+      );
+      return movie;
+    });
 };
 
 export const remove = (movieId: number) =>
-  Promise.reject(new Error("Removing the movie is not allowed at the moment."));
+  sleep().then(() => {
+    throw new Error("Removing the movie is not allowed at the moment.");
+  });
 
 export const create = (movie: NewMovie) =>
-  Promise.reject(new Error("Adding new movie is not allowed at the moment."));
+  sleep().then(() => {
+    throw new Error("Adding new movie is not allowed at the moment.");
+  });
 
-export const update = (movie: Movie) =>
-  Promise.reject(new Error("Updating movies is not allowed at the moment."));
+export const update = (movie: NewMovie) =>
+  sleep().then(() => {
+    throw new Error("Updating movies is not allowed at the moment.");
+  });
