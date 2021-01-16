@@ -1,9 +1,11 @@
+import React from "react";
 import {
   Button,
   Grid,
   Divider,
   InputAdornment,
   CircularProgress,
+  Snackbar,
 } from "@material-ui/core";
 
 import { MovieDetailed, NewMovie, genreApi, configApi, movieApi } from "api/";
@@ -58,6 +60,7 @@ export const MovieForm = ({ movie }: MovieFormProps) => {
     configApi.languageList
   );
   const { data: countries } = useFetcher("Country List", configApi.countryList);
+  const [formError, setFormError] = React.useState<Error | null>(null);
   const isUpdate = movie && movie.id;
   const {
     touched,
@@ -71,11 +74,11 @@ export const MovieForm = ({ movie }: MovieFormProps) => {
       console.log("Submiting form", values);
       if (isUpdate) {
         return movieApi.update(values).catch((error) => {
-          alert(error); // TODO: make toast
+          setFormError(error);
         });
       } else {
         return movieApi.create(values).catch((error) => {
-          alert(error); // TODO: make toast
+          setFormError(error);
         });
       }
     },
@@ -89,156 +92,170 @@ export const MovieForm = ({ movie }: MovieFormProps) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} id="movieForm" noValidate>
-      <Grid container>
-        <Grid item xs={6}>
-          <Input
-            {...getControlProps("title")}
-            label="Title"
-            placeholder="Title (EN)"
-            required
-            error={touched.title && Boolean(errors.title)}
-            helperText={touched.title && errors.title}
-          />
-          <Input
-            {...getControlProps("original_title")}
-            label="Original Title"
-          />
-          <Input
-            type="date"
-            {...getControlProps("release_date")}
-            label="Release Date"
-            required
-            InputLabelProps={{
-              shrink: true,
-            }}
-            error={touched.release_date && Boolean(errors.release_date)}
-            helperText={touched.release_date && errors.release_date}
-          />
-          <Input {...getControlProps("poster_path")} label="Poster path" />
-          <Input {...getControlProps("backdrop_path")} label="Backdrop path" />
-          <Input {...getControlProps("homepage")} label="Homepage URL" />
-          <Input
-            label="IMDB ID"
-            {...getControlProps("imdb_id")}
-            InputProps={{
-              inputProps: { maxLength: 10 },
-            }}
-            error={touched.imdb_id && Boolean(errors.imdb_id)}
-            helperText={touched.imdb_id && errors.imdb_id}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <Input
-            {...getControlProps("budget")}
-            label="Budget"
-            type="number"
-            InputProps={{
-              inputProps: {
-                min: 0,
-              },
-              startAdornment: (
-                <InputAdornment position="start">$</InputAdornment>
-              ),
-            }}
-          />
-          <Input
-            type="number"
-            label="Revenue"
-            {...getControlProps("revenue")}
-            InputProps={{
-              inputProps: {
-                min: 0,
-              },
-              startAdornment: (
-                <InputAdornment position="start">$</InputAdornment>
-              ),
-            }}
-          />
-          {languages ? (
-            <Select
-              {...getControlProps("original_language")}
-              label="Original Language"
-              options={languages}
-            />
-          ) : null}
-          {genresData ? (
-            <Select
-              {...getControlProps("genre_ids")}
-              label="Genres"
-              options={genresData.genres}
-              multiple
+    <>
+      <Form onSubmit={handleSubmit} id="movieForm" noValidate>
+        <Grid container>
+          <Grid item xs={6}>
+            <Input
+              {...getControlProps("title")}
+              label="Title"
+              placeholder="Title (EN)"
               required
-              error={touched.genre_ids && Boolean(errors.genre_ids)}
-              helperText={touched.genre_ids ? errors.genre_ids : ""}
+              error={touched.title && Boolean(errors.title)}
+              helperText={touched.title && errors.title}
             />
-          ) : null}
-          {languages ? (
-            <Select
-              {...getControlProps("spoken_languages_ids")}
-              label="Spoken Languages"
-              options={languages}
-              multiple
+            <Input
+              {...getControlProps("original_title")}
+              label="Original Title"
             />
-          ) : null}
-          {countries ? (
-            <Select
-              {...getControlProps("production_countries_ids")}
-              label="Production Countries"
-              options={countries}
-              multiple
+            <Input
+              type="date"
+              {...getControlProps("release_date")}
+              label="Release Date"
+              required
+              InputLabelProps={{
+                shrink: true,
+              }}
+              error={touched.release_date && Boolean(errors.release_date)}
+              helperText={touched.release_date && errors.release_date}
             />
-          ) : null}
-        </Grid>
-        <Grid item xs={12}>
-          <Divider />
-          <br />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "baseline",
-            }}
-          >
-            {isUpdate ? (
-              <ConfirmButton
-                title="Are you sure to remove the movie?"
-                onConfirm={handleDelete}
-                buttonProps={{ variant: "outlined", color: "secondary" }}
-              >
-                Remove
-              </ConfirmButton>
-            ) : (
-              <div></div>
-            )}
-            {submitting ? (
-              <div>
-                <CircularProgress size={16} />
-                &nbsp;Submiting ...&nbsp;
-              </div>
+            <Input {...getControlProps("poster_path")} label="Poster path" />
+            <Input
+              {...getControlProps("backdrop_path")}
+              label="Backdrop path"
+            />
+            <Input {...getControlProps("homepage")} label="Homepage URL" />
+            <Input
+              label="IMDB ID"
+              {...getControlProps("imdb_id")}
+              InputProps={{
+                inputProps: { maxLength: 10 },
+              }}
+              error={touched.imdb_id && Boolean(errors.imdb_id)}
+              helperText={touched.imdb_id && errors.imdb_id}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Input
+              {...getControlProps("budget")}
+              label="Budget"
+              type="number"
+              InputProps={{
+                inputProps: {
+                  min: 0,
+                },
+                startAdornment: (
+                  <InputAdornment position="start">$</InputAdornment>
+                ),
+              }}
+            />
+            <Input
+              type="number"
+              label="Revenue"
+              {...getControlProps("revenue")}
+              InputProps={{
+                inputProps: {
+                  min: 0,
+                },
+                startAdornment: (
+                  <InputAdornment position="start">$</InputAdornment>
+                ),
+              }}
+            />
+            {languages ? (
+              <Select
+                {...getControlProps("original_language")}
+                label="Original Language"
+                options={languages}
+              />
             ) : null}
-            {isUpdate ? (
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                disabled={submitting}
-              >
-                Update
-              </Button>
-            ) : (
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                disabled={submitting}
-              >
-                Create
-              </Button>
-            )}{" "}
-          </div>
+            {genresData ? (
+              <Select
+                {...getControlProps("genre_ids")}
+                label="Genres"
+                options={genresData.genres}
+                multiple
+                required
+                error={touched.genre_ids && Boolean(errors.genre_ids)}
+                helperText={touched.genre_ids ? errors.genre_ids : ""}
+              />
+            ) : null}
+            {languages ? (
+              <Select
+                {...getControlProps("spoken_languages_ids")}
+                label="Spoken Languages"
+                options={languages}
+                multiple
+              />
+            ) : null}
+            {countries ? (
+              <Select
+                {...getControlProps("production_countries_ids")}
+                label="Production Countries"
+                options={countries}
+                multiple
+              />
+            ) : null}
+          </Grid>
+          <Grid item xs={12}>
+            <Divider />
+            <br />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "baseline",
+              }}
+            >
+              {isUpdate ? (
+                <ConfirmButton
+                  title="Are you sure to remove the movie?"
+                  onConfirm={handleDelete}
+                  buttonProps={{ variant: "outlined", color: "secondary" }}
+                >
+                  Remove
+                </ConfirmButton>
+              ) : (
+                <div></div>
+              )}
+              {submitting ? (
+                <div>
+                  <CircularProgress size={16} />
+                  &nbsp;Submiting ...&nbsp;
+                </div>
+              ) : null}
+              {isUpdate ? (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  disabled={submitting}
+                >
+                  Update
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  disabled={submitting}
+                >
+                  Create
+                </Button>
+              )}{" "}
+            </div>
+          </Grid>
         </Grid>
-      </Grid>
-    </Form>
+      </Form>
+      <Snackbar
+        open={Boolean(formError)}
+        autoHideDuration={6000}
+        onClose={() => setFormError(null)}
+        message={formError?.message}
+        ContentProps={{
+          style: { color: "red", backgroundColor: "white" },
+        }}
+      />
+    </>
   );
 };
