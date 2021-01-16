@@ -196,7 +196,8 @@ export const MovieForm = ({ movie }: MovieFormProps) => {
           <div
             style={{
               display: "flex",
-              justifyContent: isUpdate ? "space-between" : "flex-end",
+              justifyContent: "space-between",
+              alignItems: "baseline",
             }}
           >
             {isUpdate ? (
@@ -207,6 +208,14 @@ export const MovieForm = ({ movie }: MovieFormProps) => {
               >
                 Remove
               </ConfirmButton>
+            ) : (
+              <div></div>
+            )}
+            {submitting ? (
+              <div>
+                <CircularProgress size={16} />
+                &nbsp;Submiting ...&nbsp;
+              </div>
             ) : null}
             {isUpdate ? (
               <Button
@@ -227,11 +236,6 @@ export const MovieForm = ({ movie }: MovieFormProps) => {
                 Create
               </Button>
             )}{" "}
-            {submitting ? (
-              <>
-                <CircularProgress size={16} /> Submiting ...
-              </>
-            ) : null}
           </div>
         </Grid>
       </Grid>

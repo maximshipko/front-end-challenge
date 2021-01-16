@@ -58,6 +58,7 @@ export const MovieCard = ({ movie, className }: MovieCardProps) => {
             size="small"
             onClick={goToEditPage}
             color="inherit"
+            title="Edit Movie"
           >
             <EditIcon fontSize="small" />
           </IconButton>
