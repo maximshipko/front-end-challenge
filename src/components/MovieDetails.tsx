@@ -1,3 +1,4 @@
+import { Link as RouterLink } from "react-router-dom";
 import {
   Card,
   CardMedia,
@@ -8,7 +9,10 @@ import {
   createStyles,
   Theme,
   Link,
+  Button,
+  Paper,
 } from "@material-ui/core";
+import { generatePath } from "react-router-dom";
 
 import type { MovieDetailed } from "api/";
 import {
@@ -16,6 +20,7 @@ import {
   BACKDROP_IMG_SIZE,
   POSTER_IMG_SIZE,
   NO_IMAGE_PLACEHOLDER,
+  paths,
 } from "common/";
 import { Genres } from "components/";
 
@@ -26,6 +31,7 @@ type MovieDetailsProps = {
 
 export const MovieDetails = ({ movie }: MovieDetailsProps) => {
   const classes = useStyles()();
+
   return (
     <div className={classes.root}>
       <Card className={classes.backdrop}>
@@ -68,16 +74,28 @@ export const MovieDetails = ({ movie }: MovieDetailsProps) => {
           </ul>
         </Grid>
         <Grid item>
-          <img
-            className={classes.poster}
-            src={
-              movie.poster_path
-                ? `${IMG_BASE_URL}w${POSTER_IMG_SIZE}${movie.poster_path}`
-                : NO_IMAGE_PLACEHOLDER
-            }
-            width={POSTER_IMG_SIZE}
-            alt={movie.title}
-          />
+          <Paper>
+            <img
+              className={classes.poster}
+              src={
+                movie.poster_path
+                  ? `${IMG_BASE_URL}w${POSTER_IMG_SIZE}${movie.poster_path}`
+                  : NO_IMAGE_PLACEHOLDER
+              }
+              width={POSTER_IMG_SIZE}
+              alt={movie.title}
+            />
+          </Paper>
+          <Typography align="center">
+            <Button
+              variant="outlined"
+              color="inherit"
+              component={RouterLink}
+              to={generatePath(paths.editMovie, { movieId: movie.id })}
+            >
+              Edit Movie
+            </Button>
+          </Typography>
         </Grid>
         <Grid item xs>
           <Typography variant="body2" color="textSecondary">
@@ -156,6 +174,8 @@ function useStyles() {
       },
       poster: {
         borderRadius: theme.shape.borderRadius,
+        display: "block",
+        marginBottom: "1em",
       },
     })
   );

@@ -24,7 +24,7 @@ export const EditMovieView = () => {
   const loading = !data && !error;
   return (
     <div className="edit-movie">
-      <h1>Edit: {data?.title}</h1>
+      <h1>{data?.title}</h1>
       {loading ? (
         <div>
           <CircularProgress size={16} /> Loading...
