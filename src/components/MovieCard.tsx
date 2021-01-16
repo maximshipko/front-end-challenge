@@ -10,7 +10,7 @@ import {
   IconButton,
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
-import { generatePath, Link as RouterLink } from "react-router-dom";
+import { generatePath, Link as RouterLink, useHistory } from "react-router-dom";
 
 import type { Movie } from "api/";
 import {
@@ -18,7 +18,7 @@ import {
   IMG_BASE_URL,
   POSTER_IMG_SIZE,
   NO_IMAGE_PLACEHOLDER,
-} from "common";
+} from "common/";
 
 type MovieCardProps = {
   movie: Movie;
@@ -26,6 +26,11 @@ type MovieCardProps = {
 };
 export const MovieCard = ({ movie, className }: MovieCardProps) => {
   const classes = useStyles()();
+  const history = useHistory();
+  const goToEditPage = (e: React.MouseEvent) => {
+    e.preventDefault(); // not to click on the poster
+    history.push(generatePath(paths.editMovie, { movieId: movie.id }));
+  };
 
   return (
     <Card className={`${className} ${classes.root}`}>
@@ -46,12 +51,12 @@ export const MovieCard = ({ movie, className }: MovieCardProps) => {
         />
         <CardContent className={classes.cardContent}>
           <Typography>⭐ {movie.vote_average} </Typography>
+
           <IconButton
             aria-label="edit"
             className={classes.editButton}
             size="small"
-            component={RouterLink}
-            to={generatePath(paths.editMovie, { movieId: movie.id })}
+            onClick={goToEditPage}
             color="inherit"
           >
             <EditIcon fontSize="small" />
@@ -74,7 +79,7 @@ function useStyles() {
         color: "white",
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "baseline",
+        // alignItems: "baseline",
       },
       editButton: {
         "&:hover": {
