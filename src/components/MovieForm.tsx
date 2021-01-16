@@ -8,7 +8,7 @@ import {
 
 import { MovieDetailed, NewMovie, genreApi, configApi, movieApi } from "api/";
 import { useFetcher, useForm, FormErrors } from "common/";
-import { Form, Input, Select } from "components/";
+import { Form, Input, Select, ConfirmButton } from "components/";
 
 type MovieFormProps = {
   children?: never;
@@ -83,10 +83,9 @@ export const MovieForm = ({ movie }: MovieFormProps) => {
   });
   const handleDelete = () => {
     if (!movie) return;
-    window.confirm("Are you sure to remove the movie?") &&
-      movieApi.remove(movie.id).catch((error) => {
-        alert(error); // TODO: make toast
-      });
+    movieApi.remove(movie.id).catch((error) => {
+      alert(error); // TODO: make toast
+    });
   };
 
   return (
@@ -194,15 +193,20 @@ export const MovieForm = ({ movie }: MovieFormProps) => {
         <Grid item xs={12}>
           <Divider />
           <br />
-          <div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: isUpdate ? "space-between" : "flex-end",
+            }}
+          >
             {isUpdate ? (
-              <Button
-                variant="outlined"
-                color="secondary"
-                onClick={handleDelete}
+              <ConfirmButton
+                title="Are you sure to remove the movie?"
+                onConfirm={handleDelete}
+                buttonProps={{ variant: "outlined", color: "secondary" }}
               >
                 Remove
-              </Button>
+              </ConfirmButton>
             ) : null}
             {isUpdate ? (
               <Button

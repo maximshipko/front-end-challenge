@@ -9,3 +9,4 @@ export * from "./MovieForm";
 export * from "./Genres";
 export * from "./Form";
 export * from "./formControls/";
+export * from "./ConfirmButton";
