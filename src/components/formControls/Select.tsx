@@ -10,7 +10,6 @@ import {
 import React from "react";
 
 type SelectProps = MuiSelectProps & {
-  // error: any;
   options: Array<{ id: string | number; name: string }>;
   value: unknown | unknown[];
   helperText?: string;
@@ -34,6 +33,7 @@ export const Select = ({
     otherProps.multiple && value instanceof Array && value.length
       ? label + ` (${value.length})`
       : label;
+  const labelId = `${name}__label`;
   return (
     <FormControl
       variant="outlined"
@@ -41,9 +41,10 @@ export const Select = ({
       {...(error && { error: true })}
       required={required}
     >
-      <InputLabel>{selectLabel}</InputLabel>
+      <InputLabel id={labelId}>{selectLabel}</InputLabel>
       <MuiSelect
         label={selectLabel}
+        labelId={labelId}
         name={name}
         value={value}
         onChange={onChange}

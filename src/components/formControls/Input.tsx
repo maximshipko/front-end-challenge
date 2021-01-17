@@ -10,6 +10,7 @@ export const Input = ({
   onChange,
   ...otherProps
 }: InputProps) => {
+  const inputId = `${name}__input`;
   return (
     <TextField
       name={name}
@@ -19,6 +20,8 @@ export const Input = ({
       variant="outlined"
       fullWidth
       size="small"
+      id={inputId}
+      InputLabelProps={{ htmlFor: inputId }}
       {...otherProps}
     />
   );

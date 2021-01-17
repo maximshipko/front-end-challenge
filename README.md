@@ -27,6 +27,7 @@ Although, for such a simple app, routing could have been implemented, I've used 
 - [ ] On app initialization, make api call to get all required configuration
 - [ ] Use Formik or react-hook-form
 - [ ] Use SWR or react-query for fetching data.
+- [ ] Use MSW (Mock Service Worker) for api mocking
 - [ ] Add typeahead feature for search bar. Throttle quick typing
 - [ ] Add pagination for movie lists
 - [ ] Sequre api key. Create a proxy server that will hide apy key from exposing to end user.
