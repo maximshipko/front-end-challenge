@@ -30,6 +30,7 @@ Although, for such a simple app, routing could have been implemented, I've used 
 - [ ] Add typeahead feature for search bar. Throttle quick typing
 - [ ] Add pagination for movie lists
 - [ ] Sequre api key. Create a proxy server that will hide apy key from exposing to end user.
+- [ ] Fix search form submitting
 
 #
 
