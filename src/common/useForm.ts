@@ -10,7 +10,7 @@ export type FormErrors<V> = {
 export type FormTouched<V> = {
   [key in keyof V]?: boolean;
 };
-type UseFormProps<V> = {
+export type UseFormProps<V> = {
   initialValues: V;
   onSubmit: (values: V) => Promise<unknown>;
   validator: (values: V) => FormErrors<V>;
@@ -70,13 +70,15 @@ export const useForm = <V extends FormValues>({
     } else {
       setSubmitting(true);
 
-      return onSubmit(values).finally(() => {
-        setSubmitting(false);
-      });
+      return onSubmit(values)
+        .catch((err) => {})
+        .finally(() => {
+          setSubmitting(false);
+        });
     }
   };
 
-  const getControlProps = (name: keyof V) => {
+  const getControlProps = (name: string) => {
     return {
       name,
       value: values[name] || "",
