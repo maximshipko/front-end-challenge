@@ -5,7 +5,7 @@ const cache = new Map<string, unknown>();
 // TODO: cache not only Data, but also "Promise of Data" to avoid duplicate fetch
 
 export const useFetcher = <D extends unknown>(
-  key: string,
+  key: string | null,
   fetcherFn: () => Promise<D>
 ) => {
   const [data, setData] = useState<D>(null!);

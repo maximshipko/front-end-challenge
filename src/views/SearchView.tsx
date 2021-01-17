@@ -1,3 +1,4 @@
+import React from "react";
 import { useLocation } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
 
@@ -10,7 +11,9 @@ export const SearchView = () => {
   const urlParams = new URLSearchParams(search);
   const query = urlParams.get("q") || "";
 
-  const { data, error } = useFetcher(query, () => movieApi.search(query));
+  const fetcherFn = React.useCallback(() => movieApi.search(query), [query]);
+
+  const { data, error } = useFetcher(null, fetcherFn);
   const loading = !data && !error;
 
   return (
