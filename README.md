@@ -2,7 +2,7 @@
 
 # ✨ Demo App for Collibra Coding Challenge
 
-See the demo: [The Movie Db](https://app.netlify.com/sites/sleepy-poitras-f1fe38/deploys)
+See the demo: [The Movie Db](https://sleepy-poitras-f1fe38.netlify.app/)
 
 ## API
 
@@ -30,7 +30,7 @@ Although, for such a simple app, routing could have been implemented, I've used 
 - [ ] Use MSW (Mock Service Worker) for api mocking
 - [ ] Add typeahead feature for search bar. Throttle quick typing
 - [ ] Add pagination for movie lists
-- [ ] Sequre api key. Create a proxy server that will hide apy key from exposing to end user.
+- [ ] Sequre api key. Create a proxy server that will hide api key from exposing to end user.
 - [ ] Fix search form submitting
 
 #

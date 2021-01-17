@@ -87,7 +87,7 @@ export const MovieForm = ({ movie }: MovieFormProps) => {
   const handleDelete = () => {
     if (!movie) return;
     movieApi.remove(movie.id).catch((error) => {
-      alert(error); // TODO: make toast
+      setFormError(error);
     });
   };
 
@@ -252,6 +252,7 @@ export const MovieForm = ({ movie }: MovieFormProps) => {
         autoHideDuration={6000}
         onClose={() => setFormError(null)}
         message={formError?.message}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
         ContentProps={{
           style: { color: "red", backgroundColor: "white" },
         }}
