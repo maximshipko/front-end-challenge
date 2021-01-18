@@ -48,7 +48,7 @@ export const MovieDetails = ({ movie }: MovieDetailsProps) => {
         <CardContent className={classes.backdropContent}>
           <Grid container alignItems="center">
             <Grid item xs>
-              <Typography variant="h3" noWrap>
+              <Typography variant="h3" component="h1" noWrap>
                 {movie.title}
               </Typography>
             </Grid>
@@ -92,6 +92,7 @@ export const MovieDetails = ({ movie }: MovieDetailsProps) => {
               color="inherit"
               component={RouterLink}
               to={generatePath(paths.editMovie, { movieId: movie.id })}
+              data-test-id="movie-edit-button"
             >
               Edit Movie
             </Button>

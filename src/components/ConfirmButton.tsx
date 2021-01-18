@@ -3,18 +3,22 @@ import {
   Popover,
   Typography,
   Button,
-  ButtonProps,
   makeStyles,
   createStyles,
   Theme,
 } from "@material-ui/core";
 
 interface PopconfirmProps {
+  /** The title of the confirmation box */
   title: string;
+  /** Confirmation callback */
   onConfirm: () => void;
+  /** Cancelation callback */
   onCancel?: () => void;
-  buttonProps: ButtonProps;
-  children: React.ReactChild;
+  /** props of the Button component */
+  buttonProps: React.ComponentProps<typeof Button>;
+  buttonTestId?: string;
+  children: React.ReactNode;
 }
 
 export const ConfirmButton = ({
@@ -22,6 +26,7 @@ export const ConfirmButton = ({
   onConfirm,
   onCancel,
   buttonProps = {},
+  buttonTestId,
   children,
 }: PopconfirmProps) => {
   const classes = useStyles()();
@@ -41,7 +46,12 @@ export const ConfirmButton = ({
 
   return (
     <>
-      <Button {...buttonProps} onClick={handleClick} ref={buttonRef}>
+      <Button
+        {...buttonProps}
+        onClick={handleClick}
+        ref={buttonRef}
+        data-test-id={buttonTestId}
+      >
         {children}
       </Button>
       <Popover

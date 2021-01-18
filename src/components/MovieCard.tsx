@@ -33,7 +33,10 @@ export const MovieCard = ({ movie, className }: MovieCardProps) => {
   };
 
   return (
-    <Card className={`${className} ${classes.root}`}>
+    <Card
+      className={`${className} ${classes.root}`}
+      data-test-id="movie-list-item"
+    >
       <CardActionArea
         component={RouterLink}
         to={generatePath(paths.movie, { movieId: movie.id })}
