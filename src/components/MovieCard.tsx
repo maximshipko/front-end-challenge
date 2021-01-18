@@ -21,9 +21,13 @@ import {
 } from "common/";
 
 type MovieCardProps = {
+  /** Movie list item */
   movie: Movie;
+  /** Class name of the root element */
   className?: string;
 };
+
+/** Renders a tile with movie poster and edit button. Link to Movie details page.  */
 export const MovieCard = ({ movie, className }: MovieCardProps) => {
   const classes = useStyles()();
   const history = useHistory();

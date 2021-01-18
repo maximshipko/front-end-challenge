@@ -26,6 +26,7 @@ export const Header = () => {
               color="inherit"
               component={RouterLink}
               to={paths.newMovie}
+              data-test-id="add-movie-button"
             >
               Add Movie
             </Button>

@@ -26,9 +26,11 @@ import { Genres } from "components/";
 
 type MovieDetailsProps = {
   children?: never;
+  /** Movie details object from api */
   movie: MovieDetailed;
 };
 
+/** Renders Movie page with all details, and edit button */
 export const MovieDetails = ({ movie }: MovieDetailsProps) => {
   const classes = useStyles()();
 

@@ -6,9 +6,11 @@ import { MovieCard } from "components/";
 
 type MoviesListProps = {
   children?: ReactChild | null;
+  /** Array of Movie objects */
   movies: Movie[];
 };
 
+/** Renders a list of tiles with Movie posters */
 export const MoviesList = ({ movies, children = null }: MoviesListProps) => {
   const classes = useStyles()();
   return (

@@ -15,8 +15,9 @@ interface PopconfirmProps {
   onConfirm: () => void;
   /** Cancelation callback */
   onCancel?: () => void;
-  /** props of the Button component */
+  /** Props of the Button component */
   buttonProps: React.ComponentProps<typeof Button>;
+  /** Test ID of the button */
   buttonTestId?: string;
   children: React.ReactNode;
 }

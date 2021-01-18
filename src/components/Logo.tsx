@@ -1,3 +1,4 @@
+/** Official logo of TMDB */
 export const Logo = () => {
   return (
     <img

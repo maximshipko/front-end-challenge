@@ -14,8 +14,10 @@ import { Form, Input, Select, ConfirmButton } from "components/";
 
 type MovieFormProps = {
   children?: never;
+  /** Movie details object from api, or null in case of Adding new movie */
   movie: MovieDetailed | null;
 };
+
 const initialValues: NewMovie = {
   title: "",
   original_title: "",
@@ -31,6 +33,8 @@ const initialValues: NewMovie = {
   spoken_languages_ids: [],
   production_countries_ids: [],
 };
+
+/** Form Validation function */
 const validator = (values: NewMovie) => {
   const err: FormErrors<NewMovie> = {};
   if ("title" in values && !values.title) {
@@ -53,6 +57,8 @@ const validator = (values: NewMovie) => {
 
   return err;
 };
+
+/** Renders a form with Movie details or with default values for creating new Movie */
 export const MovieForm = ({ movie }: MovieFormProps) => {
   const { data: genresData } = useFetcher("Genres list", genreApi.list);
   const { data: languages } = useFetcher(

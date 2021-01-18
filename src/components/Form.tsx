@@ -4,7 +4,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core";
 interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   children: React.ReactChild;
 }
-
+/** Simple form wrapper around html form */
 export const Form = ({ children, ...otherFormProps }: FormProps) => {
   const classes = useStyles()();
   return (

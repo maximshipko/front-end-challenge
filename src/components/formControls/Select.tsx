@@ -10,8 +10,9 @@ import {
 import React from "react";
 
 type SelectProps = MuiSelectProps & {
+  /** Array of option items {id,name} */
   options: Array<{ id: string | number; name: string }>;
-  value: unknown | unknown[];
+  /** Text for helper block, usually error message */
   helperText?: string;
 };
 
