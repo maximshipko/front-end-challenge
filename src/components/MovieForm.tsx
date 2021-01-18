@@ -211,7 +211,11 @@ export const MovieForm = ({ movie }: MovieFormProps) => {
                 <ConfirmButton
                   title="Are you sure to remove the movie?"
                   onConfirm={handleDelete}
-                  buttonProps={{ variant: "outlined", color: "secondary" }}
+                  buttonTestId="remove-movie-button"
+                  buttonProps={{
+                    variant: "outlined",
+                    color: "secondary",
+                  }}
                 >
                   Remove
                 </ConfirmButton>
@@ -230,6 +234,7 @@ export const MovieForm = ({ movie }: MovieFormProps) => {
                   color="primary"
                   type="submit"
                   disabled={submitting}
+                  data-test-id="update-submit-button"
                 >
                   Update
                 </Button>
@@ -239,6 +244,7 @@ export const MovieForm = ({ movie }: MovieFormProps) => {
                   color="primary"
                   type="submit"
                   disabled={submitting}
+                  data-test-id="create-submit-button"
                 >
                   Create
                 </Button>
